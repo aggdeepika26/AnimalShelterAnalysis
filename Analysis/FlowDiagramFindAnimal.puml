@@ -1,0 +1,14 @@
+@startuml
+start
+ : user provides find method;
+
+if (animal present in shelter) then (yes)
+ : return animal;
+ end;
+else(no)
+
+ : error Message Not Found Animal;
+ end;
+@enduml
+
+

@@ -1,0 +1,33 @@
+@startuml
+start
+:user provides find method;
+if (animal by name) then (yes)
+  if(animal found in shelter by name) then (yes)
+       : return animal;
+       end;
+  else(no)
+       : error message not found;
+       end;
+  endif
+elseif(Animal by age) then (yes)
+    if(animal found in shelter by age) then (yes)
+          : return animal;
+          end;
+     else(no)
+           : error message not found;
+            end;
+     endif
+elseif(Animal by Animal number) then (yes)
+      if(animal found in shelter by Animal number) then (yes)
+            : return animal;
+            end;
+       else(no)
+             : error message not found;
+              end;
+       endif
+else
+     :animal can be found with name age and no only;
+     end;
+     endif
+
+@enduml

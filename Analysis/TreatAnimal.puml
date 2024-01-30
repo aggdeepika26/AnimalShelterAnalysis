@@ -1,0 +1,9 @@
+@startuml
+
+start
+
+: user provides treat method;
+: Clean Animals;
+: Vaccinate Animals;
+end;
+@enduml

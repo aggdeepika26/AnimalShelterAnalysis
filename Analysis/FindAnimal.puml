@@ -1,0 +1,32 @@
+@startuml
+
+start
+
+:user inputs name or id of animal;
+if(user inputs name) then (yes)
+     : System retrieves animals by name;
+     if(are there animals) then (yes)
+        if(is there more than & animal) then (yes)
+        : error too many animals;
+        end;
+        else(no)
+         :return the found animal;
+         stop;
+        endif
+     else(no)
+        : error no animal found;
+        end;
+      endif
+else (no , uses id)
+ : System retrieves animals by id;
+
+        if(is the animal found) then (yes)
+
+             :return the found animal;
+             stop;
+        else(no)
+             : error no animal found;
+              end;
+        endif
+
+@enduml
