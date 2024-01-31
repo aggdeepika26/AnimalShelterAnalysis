@@ -1,19 +1,36 @@
 @startuml
 
 start
-
    : user Provides Add Method;
-
 if (animal already in the shelter) then (yes)
-
     :error message;
     end;
-
 else (no)
-
     : set Id to Animal;
     : Add animal to shelter;
     end;
+@enduml
+
+@startuml
+
+user --> AnimalShelterApp : input Animal Info
+AnimalShelterApp --> AnimalService : CheckAnimalPresentInShelterOrNot
+AnimalService --> AnimalRepository : getAnimal()
+AnimalService <-- AnimalRepository : List<Animal>
+alt Animal not In the List
+AnimalService --> AnimalService : AddAnimal()
+
+else Animal already in the list
+AnimalShelterApp <-- AnimalService : return null if animal alredy in list
+user <-- AnimalShelterApp : Sorry Animal already present
+
+end
+
+
+
+
+
+
 
 
 

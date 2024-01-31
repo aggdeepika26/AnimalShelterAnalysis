@@ -1,6 +1,6 @@
 package be.intecbrussel.animalShelter.model;
 
-public enum SortType {
+public enum SortOrFindType {
     NAME,
     AGE
 }

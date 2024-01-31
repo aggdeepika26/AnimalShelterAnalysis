@@ -1,12 +1,12 @@
 package be.intecbrussel.animalShelter.service;
 
 import be.intecbrussel.animalShelter.model.Animal;
-import be.intecbrussel.animalShelter.model.SortType;
+import be.intecbrussel.animalShelter.model.SortOrFindType;
 import be.intecbrussel.animalShelter.repository.AnimalRepository;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class AnimalService {
     private AnimalRepository animalRepository;
@@ -15,7 +15,7 @@ public class AnimalService {
         this.animalRepository = animalRepository;
     }
 
-    public void sortAnimalShelter(SortType sortType){
+    public void sortAnimalShelter(SortOrFindType sortType){
         List<Animal> animalList = animalRepository.getAnimals();
 
         switch (sortType) {
@@ -32,5 +32,29 @@ public class AnimalService {
 
     public void sortAnimalsByAge(List<Animal> animalList){
         animalList.sort(Comparator.comparing(Animal::getAge));
+    }
+
+
+
+    public Optional checkAnimalPresentInListOrNot(Animal animal)
+    {
+        List<Animal> animalList = animalRepository.getAnimals();
+
+        Optional<Animal> animalOptional = animalList.stream()
+                    .filter(a -> a.getId()==(animal.getId())&& a.getName().equals(animal.getName()))
+                    .findFirst();
+        if (animalOptional.isEmpty())
+           {
+                addAnimal(animal);
+           }
+
+        return animalOptional;
+    }
+
+    private void addAnimal(Animal animal)
+    {
+        List<Animal> animalList = animalRepository.getAnimals();
+        animalList.add(animal);
+        animalList.forEach(System.out::println);
     }
 }

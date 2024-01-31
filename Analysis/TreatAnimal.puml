@@ -7,3 +7,14 @@ start
 : Vaccinate Animals;
 end;
 @enduml
+
+@startuml
+user--> AnimalShelterApp : input to treat animal
+AnimalShelterApp --> AnimalService : treatAnimals()
+AnimalService --> AnimalRepository : getAnimals()
+AnimalService <-- AnimalRepository : list<Animal>
+
+AnimalService --> AnimalService : set clean to true
+AnimalService --> AnimalService : set vaccinate to true
+
+@enduml
