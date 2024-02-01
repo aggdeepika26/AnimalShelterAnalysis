@@ -14,17 +14,24 @@ else (no)
 @startuml
 
 user --> AnimalShelterApp : input Animal Info
-AnimalShelterApp --> AnimalService : CheckAnimalPresentInShelterOrNot
+AnimalShelterApp --> AnimalService : addAnimal(Animal n,newAnimal)
 AnimalService --> AnimalRepository : getAnimal()
 AnimalService <-- AnimalRepository : List<Animal>
-alt Animal not In the List
-AnimalService --> AnimalService : AddAnimal()
 
-else Animal already in the list
-AnimalShelterApp <-- AnimalService : return null if animal alredy in list
+alt New Animal already exist In the List
+AnimalService --> AnimalShelterApp : return false
 user <-- AnimalShelterApp : Sorry Animal already present
 
+else Add new animal in the list
+AnimalService --> AnimalService : aanroep add method of list to add new animal
+AnimalShelterApp <-- AnimalService : return true
+user <-- AnimalShelterApp : animal added
+
 end
+@enduml
+
+
+
 
 
 

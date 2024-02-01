@@ -1,0 +1,79 @@
+@startuml
+
+start
+
+:user inputs name or id of animal;
+if(user inputs name) then (yes)
+     : System retrieves animals by name;
+     if(are there animals) then (yes)
+        if(is there more than 1 animal) then (yes)
+        : error too many animals;
+        end;
+        else(no)
+         :return the found animal;
+         stop;
+        endif
+     else(no)
+        : error no animal found;
+        end;
+      endif
+else (no , uses id)
+ : System retrieves animals by id;
+
+        if(is the animal found) then (yes)
+
+             :return the found animal;
+             stop;
+        else(no)
+             : error no animal found;
+              end;
+        endif
+@enduml
+
+
+@startuml
+user --> AnimalShelterApp : input find animal by name or id
+AnimalShelterApp --> AnimalShelterApp : handle user request to find animal by Type NAME / Type id
+AnimalShelterApp --> AnimalService : findAnimal(SortOrFindType : type)
+AnimalService --> AnimalRepository : getAnimal()
+AnimalService <-- AnimalRepository : List<Animal>
+
+alt find animal by name
+   AnimalService --> AnimalService : findAnimalByName()
+   alt animal by the given name found
+      alt size of collection with same name is 1
+
+      AnimalShelterApp <-- AnimalService : return found animal
+      user <-- AnimalShelterApp : Animal info
+      else More animals with same name
+      user <-- AnimalShelterApp : there are more animals with same name ,Try Animal Id
+
+      end
+    else  animal by the given name not found
+
+       AnimalShelterApp <--AnimalService : null
+       user <-- AnimalShelterApp : No Animal Found
+     end
+else find animal by id
+
+     AnimalService --> AnimalService : findAnimalByID()
+     alt animal by the given ID found
+
+          AnimalShelterApp <-- AnimalService : return found animal
+          user <-- AnimalShelterApp : Animal info
+
+     else  animal by the given ID not found
+
+           AnimalShelterApp <--AnimalService : null
+           user <-- AnimalShelterApp : No Animal Found
+     end
+
+end
+
+
+
+
+
+
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+Class Animal
+{
+-  id : long
+-  name : String
+-  age : int
+
++ {method} getID() : long
++ {method} setID (): void
++ {method} getName() : String
++ {method} setName() : void
++ {method} getAge(): int
++ {method} setAge() : void
+}
+
+Class AnimalRepository
+{
+-  list<Animal>
+
++ {method} getList()  : Animal
+
+}
+
+enum SortOrFindType
+{
+NAME
+AGE
+}
+
+
+
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+start
+: user Provides findAnimalByName Method;
+: user input animal name to find;
+if (animal name found in list) then (yes)
+  :return list of animals with same name;
+  end;
+else (no)
+   : error message no animal found;
+   end;
+@enduml
+
+@startuml
+
+user --> AnimalShelterApp : input name of animal
+AnimalShelterApp --> AnimalService : findAnimalByName(String :name)
+AnimalService --> AnimalRepository : getAnimal()
+AnimalService <-- AnimalRepository : List<Animal>
+alt animal present
+   AnimalService --> AnimalShelterApp : return List of Animals With same name
+   AnimalShelterApp --> user : print the list of Animals
+else
+   AnimalService --> AnimalShelterApp : return null
+   AnimalShelterApp --> user : Error msg : No animal found
+
+end
+@enduml

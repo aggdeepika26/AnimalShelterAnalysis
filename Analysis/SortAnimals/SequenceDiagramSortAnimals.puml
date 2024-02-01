@@ -1,0 +1,53 @@
+@startuml
+
+user --> AnimalShelterApp  : input name or age
+AnimalShelterApp --> AnimalService : sortAnimalShelter(sortType : sortType)
+AnimalService --> AnimalRepository : getAnimals()
+AnimalService <-- AnimalRepository : List<Animal>
+alt sorting by name
+
+
+AnimalService --> AnimalService : sortAnimalsByName(List<Animal>)
+
+else sorting by age
+
+
+AnimalService --> AnimalService : sortAnimalsByAge(List<Animal>)
+end
+AnimalShelterApp <-- AnimalService : void
+user <-- AnimalShelterApp : OK message
+
+
+@enduml
+
+
+
+@startuml
+
+user --> AnimalShelterApp  : input name or age
+AnimalShelterApp --> AnimalService : sortAnimalShelter(sortType : sortType)
+AnimalService --> AnimalRepository : getAnimals()
+AnimalService <-- AnimalRepository : List<Animal>
+AnimalService --> AnimalService : sortAnimalsByName(List<Animal>)
+AnimalShelterApp <-- AnimalService : void
+user <-- AnimalShelterApp : OK message
+@enduml
+
+
+@startuml
+
+user--> frontend
+frontend-->backend_controller
+backend_controller-->backend_service
+backend_service-->backend_repository
+backend_repository-->database
+backend_repository <-- database
+backend_service <-- backend_repository
+backend_controller<--backend_service
+frontend<--backend_controller
+user <-- frontend
+
+
+
+
+@enduml
